@@ -4,8 +4,9 @@
 #include "math.h"
 #include "float.h"
 
-inline
-double logaddexp(double x, double y)
+/* Implements log(e^x + e^y).
+ */
+inline double logaddexp(double x, double y)
 {
     double tmp = x - y;
 
@@ -20,8 +21,11 @@ double logaddexp(double x, double y)
     return tmp;
 }
 
-inline
-double logaddexps(double x, double y, double sx, double sy)
+/* Implements log(sx * e^x + sy * e^y).
+ *
+ * It assumes that sx * e^x + sy * e^y > 0.
+ */
+inline double logaddexps(double x, double y, double sx, double sy)
 {
     double tmp = x - y;
 
@@ -49,8 +53,10 @@ double logaddexps(double x, double y, double sx, double sy)
     return tmp;
 }
 
-inline
-double logaddexpss(double x, double y, double sx, double sy, double* sign)
+/* Returns log(|c|) and c/|c|, for c = sx * e^x + sy * e^y.
+ */
+inline double logaddexpss(double x, double y, double sx, double sy,
+                          double* sign)
 {
   double sxx = log(fabs(sx)) + x;
   double syy = log(fabs(sy)) + y;
