@@ -6,7 +6,7 @@
 
 /* Implements log(e^x + e^y).
  */
-inline double logaddexp(double x, double y)
+inline static double logaddexp(double x, double y)
 {
     double tmp = x - y;
 
@@ -25,7 +25,7 @@ inline double logaddexp(double x, double y)
  *
  * It assumes that sx * e^x + sy * e^y > 0.
  */
-inline double logaddexps(double x, double y, double sx, double sy)
+inline static double logaddexps(double x, double y, double sx, double sy)
 {
     double tmp = x - y;
 
@@ -55,8 +55,8 @@ inline double logaddexps(double x, double y, double sx, double sy)
 
 /* Returns log(|c|) and c/|c|, for c = sx * e^x + sy * e^y.
  */
-inline double logaddexpss(double x, double y, double sx, double sy,
-                          double* sign)
+inline static double logaddexpss(double x, double y, double sx, double sy,
+                                 double* sign)
 {
   double sxx = log(fabs(sx)) + x;
   double syy = log(fabs(sy)) + y;
