@@ -29,7 +29,7 @@ inline static double logaddexp(double x, double y)
 
 /* Implements log(sx * e^x + sy * e^y).
  *
- * It assumes that sx * e^x + sy * e^y > 0.
+ * Note: It assumes that sx * e^x + sy * e^y > 0.
  */
 inline static double logaddexps(double x, double y, double sx, double sy)
 {

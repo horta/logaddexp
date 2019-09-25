@@ -1,5 +1,5 @@
 #include "logaddexp.h"
-#include <stdio.h>
+#include <stddef.h>
 
 #define EPSILON 1e-12
 
@@ -75,6 +75,10 @@ int test_logaddexps_hand_made(void)
     double expected = 2.9946394843421738;
 
     if (fabs(expected - logaddexps(-39.1, 3.1, -3.3, 0.9)) > EPSILON)
+        return 1;
+
+    expected = -7.470820903793559;
+    if (fabs(expected - logaddexps(-4., -5., -0.3, 0.9)) > EPSILON)
         return 1;
 
     return 0;

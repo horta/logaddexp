@@ -14,9 +14,12 @@ enable_testing()
 
 add_executable(test_logaddexp test/logaddexp.c)
 target_include_directories(test_logaddexp PUBLIC ./)
-add_test(NAME logaddexp  COMMAND test_logaddexp)
+add_test(NAME logaddexp COMMAND test_logaddexp)
 
 add_executable(test_logaddexps test/logaddexps.c)
 target_include_directories(test_logaddexps PUBLIC ./)
-add_test(NAME logaddexps  COMMAND test_logaddexps)
+add_test(NAME logaddexps COMMAND test_logaddexps)
 
+add_executable(test_logaddexpss test/logaddexpss.c)
+target_include_directories(test_logaddexpss PUBLIC ./)
+add_test(NAME logaddexpss COMMAND test_logaddexpss)
