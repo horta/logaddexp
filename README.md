@@ -1,4 +1,4 @@
-![Travis (.com)](https://img.shields.io/travis/com/horta/logaddexp?label=linux%2Fmacos)
+![Travis (.com)](https://img.shields.io/travis/com/horta/logaddexp?label=linux%2Fmacos) ![AppVeyor](https://img.shields.io/appveyor/ci/horta/logaddexp?label=windows)
 
 # logaddexp
 
