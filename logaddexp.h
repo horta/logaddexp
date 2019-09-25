@@ -1,6 +1,12 @@
 #ifndef LOGADDEXP_H
 #define LOGADDEXP_H
 
+#define LOGADDEXP_VERSION_MAJOR 0
+#define LOGADDEXP_VERSION_MINOR 0
+#define LOGADDEXP_VERSION_PATCH 1
+
+#define LOGADDEXP_VERSION "0.0.1"
+
 #include "math.h"
 #include "float.h"
 
