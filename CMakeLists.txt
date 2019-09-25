@@ -10,10 +10,9 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang")
     -Wconversion -Wmissing-prototypes -Wno-unused-parameter)
 endif()
 
-if( UNIX AND NOT BEOS )
+if(UNIX AND NOT BEOS)
   set(LIBS m)
 endif()
-
 
 enable_testing()
 
@@ -24,10 +23,10 @@ add_test(NAME logaddexp COMMAND test_logaddexp)
 
 add_executable(test_logaddexps test/logaddexps.c)
 target_include_directories(test_logaddexps PUBLIC ./)
-target_link_libraries(test_logaddexp ${LIBS})
+target_link_libraries(test_logaddexps ${LIBS})
 add_test(NAME logaddexps COMMAND test_logaddexps)
 
 add_executable(test_logaddexpss test/logaddexpss.c)
 target_include_directories(test_logaddexpss PUBLIC ./)
-target_link_libraries(test_logaddexp ${LIBS})
+target_link_libraries(test_logaddexpss ${LIBS})
 add_test(NAME logaddexpss COMMAND test_logaddexpss)
