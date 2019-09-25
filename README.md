@@ -1,6 +1,6 @@
 # logaddexp
 
-C library that implements log of sum of log-exponentials.
+C library that implements the logarithm of the sum of exponentiations.
 
 Inspired by NumPy's `logaddexp` function, I have implemented the
 following functions in C:

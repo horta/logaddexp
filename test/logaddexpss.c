@@ -1,6 +1,5 @@
 #include "logaddexp.h"
 #include <stddef.h>
-#include <stdio.h>
 
 #define EPSILON 1e-12
 
