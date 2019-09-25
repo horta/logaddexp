@@ -7,6 +7,9 @@
 
 #define LOGADDEXP_VERSION "1.0.0"
 
+/* For Windows. */
+#define _USE_MATH_DEFINES
+
 #include "float.h"
 #include "math.h"
 
