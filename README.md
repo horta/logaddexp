@@ -1,3 +1,5 @@
+![Travis (.com)](https://img.shields.io/travis/com/horta/logaddexp?label=linux%2Fmacos)
+
 # logaddexp
 
 C library that implements the logarithm of the sum of exponentiations.
