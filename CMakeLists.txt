@@ -1,32 +1,35 @@
-cmake_minimum_required(VERSION 3.4 FATAL_ERROR)
-project(logaddexp LANGUAGES C)
-set(CMAKE_C_STANDARD 11)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+
+# Fetch version from header
+set(VERSION_REGEX "#define LOGADDEXP_VERSION[ \t]+\"(.+)\"")
+file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/logaddexp.h"
+  VERSION_STRING REGEX ${VERSION_REGEX})
+string(REGEX REPLACE ${VERSION_REGEX} "\\1" VERSION_STRING "${VERSION_STRING}")
+
+project(logaddexp LANGUAGES C VERSION ${VERSION_STRING})
 
 # Generate compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(CMAKE_C_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -pedantic -Wstrict-prototypes -Wshadow
-    -Wconversion -Wmissing-prototypes -Wno-unused-parameter)
-endif()
+add_library(logaddexp INTERFACE)
+add_library(LOGADDEXP::logaddexp ALIAS logaddexp)
+set_target_properties(logaddexp PROPERTIES PUBLIC_HEADER logaddexp.h)
+target_compile_features (logaddexp INTERFACE c_std_11)
+target_include_directories(logaddexp
+  INTERFACE
+    $<INSTALL_INTERFACE:.>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+)
+target_link_libraries(logaddexp INTERFACE $<$<BOOL:${UNIX}>:m>)
 
-if(UNIX AND NOT BEOS)
-  set(LIBS m)
-endif()
+install(TARGETS logaddexp EXPORT logaddexp-targets)
+
+# Export the targets to a script
+install(EXPORT logaddexp-targets
+    FILE logaddexp-config.cmake
+    NAMESPACE LOGADDEXP::
+    DESTINATION lib/cmake/logaddexp
+)
 
 enable_testing()
-
-add_executable(test_logaddexp test/logaddexp.c)
-target_include_directories(test_logaddexp PUBLIC ./)
-target_link_libraries(test_logaddexp ${LIBS})
-add_test(NAME logaddexp COMMAND test_logaddexp)
-
-add_executable(test_logaddexps test/logaddexps.c)
-target_include_directories(test_logaddexps PUBLIC ./)
-target_link_libraries(test_logaddexps ${LIBS})
-add_test(NAME logaddexps COMMAND test_logaddexps)
-
-add_executable(test_logaddexpss test/logaddexpss.c)
-target_include_directories(test_logaddexpss PUBLIC ./)
-target_link_libraries(test_logaddexpss ${LIBS})
-add_test(NAME logaddexpss COMMAND test_logaddexpss)
+add_subdirectory(test)

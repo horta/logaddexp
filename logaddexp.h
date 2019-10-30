@@ -10,8 +10,8 @@
 /* For Windows. */
 #define _USE_MATH_DEFINES
 
-#include "float.h"
-#include "math.h"
+#include <float.h>
+#include <math.h>
 
 /* Implements log(e^x + e^y).
  */

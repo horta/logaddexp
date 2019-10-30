@@ -1,18 +1,16 @@
 os:
 - linux
 - osx
-dist: trusty
 language: c
-sudo: required
 compiler:
 - clang
 - gcc
 script:
 - mkdir build
-- pushd build
+- cd build
 - cmake -DCMAKE_BUILD_TYPE=Release ..
-- make
-- make test
+- cmake --build .
+- cmake --build . --type test
 notifications:
   email:
     recipients:
