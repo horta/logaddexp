@@ -22,7 +22,7 @@ target_include_directories(logaddexp
 target_link_libraries(logaddexp INTERFACE $<$<BOOL:${UNIX}>:m>)
 
 install(TARGETS logaddexp EXPORT logaddexp-targets)
-install(DIRECTORY include DESTINATION include)
+install(DIRECTORY include/ DESTINATION include)
 
 # Export the targets to a script
 install(EXPORT logaddexp-targets
