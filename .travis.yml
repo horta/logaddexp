@@ -8,9 +8,9 @@ compiler:
 script:
 - mkdir build
 - cd build
-- cmake -DCMAKE_BUILD_TYPE=Release ..
+- cmake ..
 - cmake --build .
-- cmake --build . --type test
+- cmake --build . --target test
 notifications:
   email:
     recipients:
