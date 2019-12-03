@@ -5,8 +5,10 @@ function(logaddexp_add_test name)
   add_test(NAME ${name} COMMAND test_${name})
   target_compile_options(test_${name}
     PRIVATE
-    $<$<BOOL:${WIN32}>:/W4 /WX>
-    $<$<NOT:$<BOOL:${WIN32}>>:-pedantic -Wall -Wextra -Wshadow -Werror>
+    $<$<STREQUAL:${CMAKE_C_COMPILER_ID},MSVC>:/W4 /WX>
+    $<$<STREQUAL:${CMAKE_C_COMPILER_ID},GNU>:-pedantic -Wall -Wextra -Wshadow -Werror>
+    $<$<STREQUAL:${CMAKE_C_COMPILER_ID},Clang>:-pedantic -Wall -Wextra -Wshadow -Werror>
+    $<$<STREQUAL:${CMAKE_C_COMPILER_ID},AppleClang>:-pedantic -Wall -Wextra -Wshadow -Werror>
   )
 
 endfunction()
