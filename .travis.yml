@@ -34,7 +34,7 @@ script:
 - cmake --build . --config Release
 - ctest --output-on-failure -C Release
 - cmake --build . --config Release --target install
-- test -e $TRAVIS_BUILD_DIR/prefix/include/logaddexp/logaddexp.h
+- test -e $TRAVIS_BUILD_DIR/prefix/include/logaddexp.h
 - test -e $TRAVIS_BUILD_DIR/prefix/lib/cmake/logaddexp/logaddexp-config.cmake
 - test -e $TRAVIS_BUILD_DIR/prefix/lib/cmake/logaddexp/logaddexp-targets-release.cmake
 - test -e $TRAVIS_BUILD_DIR/prefix/lib/cmake/logaddexp/logaddexp-targets.cmake
