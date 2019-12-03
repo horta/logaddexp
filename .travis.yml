@@ -11,20 +11,6 @@ jobs:
     env: GENERATOR=Ninja
     before_install:
     - choco install ninja --no-progress -y
-  # - os: linux
-  #   name: Install
-  #   sudo: required
-  #   before_script: test -e /usr/bin/cmake || sudo ln -s $(which cmake) /usr/bin/cmake
-  #   script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp
-  #     DO_CMD=sudo bash
-  # - os: osx
-  #   name: Install
-  #   script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp
-  #     DO_CMD=sudo bash
-  # - os: windows
-  #   name: Install
-  #   script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp
-  #     bash
 script:
 - mkdir prefix
 - mkdir build
@@ -47,7 +33,7 @@ notifications:
 deploy:
   provider: releases
   api_key:
-    secure: Ks7CDIPJw+s1/lPO02hrUxuWuhLqe4DE/JMd0/Hwi4ZBqBzfLhetIiVIyL+s/kVEGSJaaRgYHDUy/Du6w8RHyizO4tyJGdGqZakLd0C7ukqk59v6oFphll+9ZfM5TLMuXOtFEVFQvojgaKEIZBvl7IVn1pMebkv/5twf2wx6MMA0TiYLe52ZaP6L1ltJtK9LHcRajwenjVlRhq3IZHR7cLqX5SWoYtIucRupRMc+EsZbQH0JxtQvbLqPt6pqMRM0JWNQhmCnp+8X57D7wbpChOHjSp8dVXP0bSMKesAYrSIf8yQyjdolccDTMFbGrhIl26QZGPsIcwm3mR33vPQTMVfGDXqwnqeTsKMBDo8uSonj1u8FxanGVX4JrUMOY3GPOl3sAwqayBWxi1GUo8/JsfxLzfMr8s7AhcUYzQ69iKRzbJBsRj38xiAdd0sv/DLIZ4AvybMGbLecBVW31UTnDmuBLBj/tUTILBCtG7yEAqXalRq0qgmJjLavgYQ6EIdzZnQv5HitHEkp67nPRkM7cG344DmBkGk8X8WGe8Zzm7Xs7zBAlIk1KxEnQ7B0wR00MejQPfX7KPLxjYXCUbXJrVFcHu+OoWjRuhr3FlF6WavbzW1+zHC4a40I39kMcuWz6sF4O9/Rm9nmO/APNUsjHwwNZT86xJOog+MlYboRtn4=
+    secure: l64/AUBDPJz9MB5m0fJhOOjorwV2NC6Oh4c/CQdMeY+Ur6/BBsU4M0SXk1zWa/+jGO5dTzYlKcgLg4nr7AYQ4KBpfs+X09+hMjhxyyLr4iWyybPKCCLBaVwIlsvoiWXJz6p8Hyw6q4dkAz3b0cFeFAzusJZVwSYxMg/mjItewc2FcHuy66L5PyfEkzecb2j+zvdBxxDbSofwxeNifziVql3faIFuei9n/eUows+MGEWRxqhImzGsnlB13aDwVlzNnk0w4OD1CHckAbrbOfonHgcxT2+Vhc7r1J/2HM41AiYAR8vk70QtjIWMDb5jdz0VFykFnMabY1Vp7CUInyijQMabPfSRCJIfyV/gXkQas+EXqM9W7n95/gaDFlonXbrYZcNGVv/VMgx1zgue8BajIp3Shfm++uExlZ2rtag1lGcxfLR/Q9+ScQJFNsSthyrn9N+6hPYMWDk7CjgE9JwMEZzLFt5MjZPSUsav4hUAhGP03WkzQdIJa2Kii2us5iiBDLvU65hB7CkxcIqWmdk43RATxwBD3usR2yLVNBwL8KdbVpABx6reUrh1p5FxxzORnJkqsgEJrISCBgZf/HW/Jo5fCdaA6wTKlQUC7tKNDHn9dP4uS7jZ/gR3mYvoQt9GsdRTt0cx/Kvcw03Jf14IsdkMTc3oI8QnsugDFqyNqhs=
   on:
     tags: true
     repo: horta/logaddexp
