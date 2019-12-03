@@ -33,6 +33,7 @@ script:
 - cmake --build . --config Release --target install
 - test -e $TRAVIS_BUILD_DIR/prefix/include/logaddexp.h
 - test -e $TRAVIS_BUILD_DIR/prefix/lib/cmake/logaddexp/logaddexp-config.cmake
+- test -e $TRAVIS_BUILD_DIR/prefix/lib/cmake/logaddexp/logaddexp-targets.cmake
 - cd $TRAVIS_BUILD_DIR
 - git clean -xdf
 notifications:

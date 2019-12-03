@@ -27,7 +27,7 @@ install(DIRECTORY include/ DESTINATION include)
 
 # Export the targets to a script
 install(EXPORT logaddexp-targets
-    FILE logaddexp-config.cmake
+    FILE logaddexp-targets.cmake
     NAMESPACE LOGADDEXP::
     DESTINATION lib/cmake/logaddexp
 )
