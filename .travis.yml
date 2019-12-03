@@ -1,19 +1,53 @@
-os:
-- linux
-- osx
 language: c
-compiler:
-- clang
-- gcc
+jobs:
+  include:
+    - os: linux
+      env: GENERATOR="Unix Makefiles"
+    - os: osx
+      env: GENERATOR="Unix Makefiles"
+    - os: windows
+      env: GENERATOR="Visual Studio 15 2017 Win64"
+    - os: windows
+      env: GENERATOR=Ninja
+      before_install:
+        - choco install ninja --no-progress -y
+    - os: linux
+      name: Install
+      sudo: required
+      before_script: test -e /usr/bin/cmake || sudo ln -s $(which cmake) /usr/bin/cmake
+      script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp DO_CMD=sudo bash
+    - os: osx
+      name: Install
+      script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp DO_CMD=sudo bash
+    - os: windows
+      name: Install
+      script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp bash
 script:
-- mkdir build
-- cd build
-- cmake ..
-- cmake --build .
-- cmake --build . --target test
+  - mkdir prefix
+  - mkdir build
+  - cd build
+  - cmake -G"$GENERATOR" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=$TRAVIS_BUILD_DIR/prefix ..
+  - cmake --build . --config Release
+  - ctest --output-on-failure -C Release
+  - cmake --build . --config Release --target install
+  - test -e $TRAVIS_BUILD_DIR/prefix/include/logaddexp/logaddexp.h
+  - test -e $TRAVIS_BUILD_DIR/prefix/lib/cmake/logaddexp/logaddexp-config.cmake
+  - test -e $TRAVIS_BUILD_DIR/prefix/lib/cmake/logaddexp/logaddexp-targets-release.cmake
+  - test -e $TRAVIS_BUILD_DIR/prefix/lib/cmake/logaddexp/logaddexp-targets.cmake
+  - cd $TRAVIS_BUILD_DIR
+  - git clean -xdf
 notifications:
   email:
     recipients:
-    - danilo.horta@pm.me
+      - danilo.horta@pm.me
     on_success: never
     on_failure: always
+deploy:
+  provider: releases
+  api_key:
+    secure: OSy0q7JXsJrjvwJS/8MVCf3oxDq5Wz8ZH4YKmQedzAhjO4pcV4frE1LWxy/xO4mmuMThdHBgsrDYlE8+QQqh57LpPV0M+GB+hrwxNdv0guo2ewumBUbUWvcojlnX9PWrZhAodzcHp2QADjg3NMFtk31ERr7dS5ed0my7CPJbQqTvhd4XPvLH2d34ZXe09sJ1AqwIMKrAQdFR949kGPhVOp3KLzG1a/Wnwgp4GPusaJ5pf3CbpQ6n3ykGBA4KZ+KCrAhamONW39mPhMvD+9cit8RkrBcVL1UkdR2IJkXHjqzNRJAjQSOc7QP/UCc4zq7tznrQzAX8+grJIfxDI8ic9HjuQh/2/z1jB6030o5buOBI+NLL/y2twxo37nSlpMGci4DR+L+4H241xx4hHvNpG790dViTao0+jFCXe+hNt0w7AkQo96QGHApV8RNn+DAEwHNVLqGswmZFdC/sUdQkNs180G41kxgJG9lx9FQxygn6KCGoxHevU2ud2y4rGkYQ+y2zdhNlV5kZlwAw7rDfnsXJO9Vcp8CMgAV2NEGabWMgu/zp7gnNLVMm7GigZHFUruw6z+CP2WX1QZ2v68lx01mpUce9mnF86rLu/YgWapZhSKRHSPiC/5iZ4c54GlAe8ljzbOJXBr8XOG5ChRBOF2RNrx8bahPyHJhYEdFQHak=
+  on:
+    tags: true
+    repo: horta/logaddexp
+    branch: master
+    skip_existing: true

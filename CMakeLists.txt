@@ -6,14 +6,15 @@ file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/include/logaddexp.h"
   VERSION_STRING REGEX ${VERSION_REGEX})
 string(REGEX REPLACE ${VERSION_REGEX} "\\1" VERSION_STRING "${VERSION_STRING}")
 
-project(logaddexp LANGUAGES C VERSION ${VERSION_STRING})
+project(logaddexp LANGUAGES C VERSION ${VERSION_STRING}
+  DESCRIPTION "Implements the logarithm of the sum of exponentiations.")
 
 # Generate compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(logaddexp INTERFACE)
 add_library(LOGADDEXP::logaddexp ALIAS logaddexp)
-target_compile_features (logaddexp INTERFACE c_std_11)
+target_compile_features(logaddexp INTERFACE c_std_11)
 target_include_directories(logaddexp
   INTERFACE
     $<INSTALL_INTERFACE:include>
@@ -28,6 +29,15 @@ install(DIRECTORY include/ DESTINATION include)
 install(EXPORT logaddexp-targets
     FILE logaddexp-config.cmake
     NAMESPACE LOGADDEXP::
+    DESTINATION lib/cmake/logaddexp
+)
+include(CMakePackageConfigHelpers)
+configure_package_config_file(logaddexp-config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/logaddexp-config.cmake
+    INSTALL_DESTINATION lib/cmake/logaddexp
+    NO_SET_AND_CHECK_MACRO
+)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/logaddexp-config.cmake
     DESTINATION lib/cmake/logaddexp
 )
 
