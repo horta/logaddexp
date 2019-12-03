@@ -20,7 +20,7 @@ double logaddexps(double x, double y, double sx, double sy);
 
 /* Returns log(|c|) and c/|c|, for c = sx * e^x + sy * e^y.
  */
-double logaddexpss(double x, double y, double sx, double sy, double* sign);
+double logaddexpss(double x, double y, double sx, double sy, double *sign);
 ```
 
 # How to use?
