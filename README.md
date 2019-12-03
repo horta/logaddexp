@@ -1,6 +1,6 @@
-![Travis (.com)](https://img.shields.io/travis/com/horta/logaddexp?label=linux%2Fmacos) ![AppVeyor](https://img.shields.io/appveyor/ci/horta/logaddexp?label=windows)
-
 # logaddexp
+
+[![Travis](https://img.shields.io/travis/com/horta/logaddexp.svg)](https://travis-ci.com/horta/logaddexp)
 
 C library that implements the logarithm of the sum of exponentiations.
 
