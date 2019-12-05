@@ -1,36 +1,38 @@
 language: c
 jobs:
   include:
-  - name: linux-default
+  - name: Build on linux-default
     os: linux
     env: GENERATOR="Unix Makefiles"
-  - name: linux-trusty
+  - name: Build on linux-trusty
     os: linux
     env: GENERATOR="Unix Makefiles"
     dist: trusty
-  - name: osx-default
+  - name: Build on osx-default
     os: osx
     env: GENERATOR="Unix Makefiles"
-  - name: osx-xcode6.4
+  - name: Build on osx-xcode6.4
     os: osx
     osx_image: xcode6.4
     env: GENERATOR="Unix Makefiles"
-  - os: windows
+  - name: Build on windows
+    os: windows
     env: GENERATOR="Visual Studio 15 2017 Win64"
-  - os: windows
+  - name: Build on windows
+    os: windows
     env: GENERATOR=Ninja
     before_install:
     - choco install ninja --no-progress -y
-  - os: linux
-    name: Install
+  - name: Install on linux-default
+    os: linux
     sudo: required
     before_script: test -e /usr/bin/cmake || sudo ln -s $(which cmake) /usr/bin/cmake
     script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp DO_CMD=sudo bash
-  - os: osx
-    name: Install
+  - name: Install on osx-default
+    os: osx
     script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp DO_CMD=sudo bash
-  - os: windows
-    name: Install
+  - name: Install on windows
+    os: windows
     script: curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp bash
 script:
 - mkdir prefix
