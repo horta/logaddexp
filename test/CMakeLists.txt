@@ -2,6 +2,7 @@ function(logaddexp_add_test name)
 
   add_executable(test_${name} ${name}.c)
   target_link_libraries(test_${name} LOGADDEXP::logaddexp)
+  set_target_properties(logaddexp PROPERTIES C_STANDARD 99)
   add_test(NAME ${name} COMMAND test_${name})
   target_compile_options(test_${name}
     PRIVATE
