@@ -1,14 +1,18 @@
 language: c
 jobs:
   include:
-  - os: linux
+  - name: linux-default
+    os: linux
     env: GENERATOR="Unix Makefiles"
-  - os: linux
+  - name: linux-trusty
+    os: linux
     env: GENERATOR="Unix Makefiles"
     dist: trusty
-  - os: osx
+  - name: osx-default
+    os: osx
     env: GENERATOR="Unix Makefiles"
-  - os: osx
+  - name: osx-xcode6.4
+    os: osx
     osx_image: xcode6.4
     env: GENERATOR="Unix Makefiles"
   - os: windows
