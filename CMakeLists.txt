@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 
 # Fetch version from header
 set(VERSION_REGEX "#define LOGADDEXP_VERSION[ \t]+\"(.+)\"")
@@ -6,15 +6,14 @@ file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/include/logaddexp.h"
   VERSION_STRING REGEX ${VERSION_REGEX})
 string(REGEX REPLACE ${VERSION_REGEX} "\\1" VERSION_STRING "${VERSION_STRING}")
 
-project(logaddexp LANGUAGES C VERSION ${VERSION_STRING}
-  DESCRIPTION "Implements the logarithm of the sum of exponentiations.")
+project(logaddexp LANGUAGES C VERSION ${VERSION_STRING})
+set(PROJECT_DESCRIPTION "Implements the logarithm of the sum of exponentiations.")
 
 # Generate compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(logaddexp INTERFACE)
 add_library(LOGADDEXP::logaddexp ALIAS logaddexp)
-target_compile_features(logaddexp INTERFACE c_std_11)
 target_include_directories(logaddexp
   INTERFACE
     $<INSTALL_INTERFACE:include>

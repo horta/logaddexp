@@ -3,7 +3,13 @@ jobs:
   include:
   - os: linux
     env: GENERATOR="Unix Makefiles"
+  - os: linux
+    env: GENERATOR="Unix Makefiles"
+    dist: trusty
   - os: osx
+    env: GENERATOR="Unix Makefiles"
+  - os: osx
+    osx_image: xcode6.4
     env: GENERATOR="Unix Makefiles"
   - os: windows
     env: GENERATOR="Visual Studio 15 2017 Win64"
