@@ -13,7 +13,7 @@ set(PROJECT_DESCRIPTION "Implements the logarithm of the sum of exponentiations.
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(logaddexp INTERFACE)
-set_target_properties(logaddexp PROPERTY C_STANDARD 99)
+set_target_properties(logaddexp PROPERTIES C_STANDARD 99)
 add_library(LOGADDEXP::logaddexp ALIAS logaddexp)
 target_include_directories(logaddexp
   INTERFACE
