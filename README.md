@@ -1,6 +1,6 @@
 # logaddexp
 
-[![Travis](https://img.shields.io/travis/com/horta/logaddexp.svg)](https://travis-ci.com/horta/logaddexp)
+[![Travis](https://travis-ci.com/horta/logaddexp.svg?branch=master)](https://travis-ci.com/horta/logaddexp)
 
 C library that implements the logarithm of the sum of exponentiations.
 
@@ -25,4 +25,16 @@ double logaddexpss(double x, double y, double sx, double sy, double *sign);
 
 # How to use?
 
+## Easiest way
+
 Include `logaddexp.h` in your C/C++ project.
+
+## CMake way
+
+In your `CMakeLists.txt`, add the following:
+
+```
+find_package(logaddexp REQUIRED)
+
+target_link_libraries(mylib PRIVATE LOGADDEXP::logaddexp)
+```
