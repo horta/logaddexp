@@ -3,9 +3,9 @@
 
 #define LOGADDEXP_VERSION_MAJOR 1
 #define LOGADDEXP_VERSION_MINOR 0
-#define LOGADDEXP_VERSION_PATCH 2
+#define LOGADDEXP_VERSION_PATCH 3
 
-#define LOGADDEXP_VERSION "1.0.2"
+#define LOGADDEXP_VERSION "1.0.3"
 
 /* For Windows. */
 #define _USE_MATH_DEFINES
@@ -15,9 +15,9 @@
 
 /* Implements log(e^x + e^y).
  */
-inline static double logaddexp(double x, double y)
+inline static double logaddexp(double const x, double const y)
 {
-    double tmp = x - y;
+    double const tmp = x - y;
 
     if (x == y)
         return x + M_LN2;
@@ -34,12 +34,13 @@ inline static double logaddexp(double x, double y)
  *
  * Note: It assumes that sx * e^x + sy * e^y > 0.
  */
-inline static double logaddexps(double x, double y, double sx, double sy)
+inline static double logaddexps(double const x, double const y, double const sx,
+                                double const sy)
 {
-    double tmp = x - y;
+    double const tmp = x - y;
 
-    double sxx = log(fabs(sx)) + x;
-    double syy = log(fabs(sy)) + y;
+    double const sxx = log(fabs(sx)) + x;
+    double const syy = log(fabs(sy)) + y;
 
     if (sxx == syy) {
         if (sx * sy > 0)
@@ -61,10 +62,11 @@ inline static double logaddexps(double x, double y, double sx, double sy)
 
 /* Returns log(|c|) and c/|c|, for c = sx * e^x + sy * e^y.
  */
-inline static double logaddexpss(double x, double y, double sx, double sy, double *sign)
+inline static double logaddexpss(double const x, double const y, double sx, double sy,
+                                 double *sign)
 {
-    double sxx = log(fabs(sx)) + x;
-    double syy = log(fabs(sy)) + y;
+    double const sxx = log(fabs(sx)) + x;
+    double const syy = log(fabs(sy)) + y;
 
     if (sxx == syy) {
         if (sx * sy > 0) {
