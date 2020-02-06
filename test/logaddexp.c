@@ -58,7 +58,7 @@ int test_logaddexp_inf(void)
     double z[] = {INFINITY, INFINITY, INFINITY, -INFINITY, INFINITY, INFINITY, 1, 1};
 
     for (size_t i = 0; i < 8; ++i) {
-        if (fabs(z[i] - logaddexp(x[i], y[i])) > EPSILON)
+        if (logaddexp(x[i], y[i]) != z[i])
             return 1;
     }
     return 0;
