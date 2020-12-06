@@ -13,7 +13,7 @@
 #include <float.h>
 #include <math.h>
 
-/* Computes ㏒ₑ(𝑒ˣ + 𝑒ʸ) in safe and accurate way.
+/* Computes ㏒ₑ(𝑒ˣ + 𝑒ʸ) in a safe and accurate way.
  *
  * For example, `log(exp(1e3) + exp(-INFINITY))` will likely overflow,
  * while `logaddexp(1e3, -INFINITY)` will return `1e3`.
@@ -48,7 +48,7 @@ inline static float logaddexpf(float x, float y)
     return tmp;
 }
 
-/* Computes ㏒ₑ(𝑠ₓ⋅𝑒ˣ + 𝑠ᵧ⋅𝑒ʸ) in safe and accurate way.
+/* Computes ㏒ₑ(𝑠ₓ⋅𝑒ˣ + 𝑠ᵧ⋅𝑒ʸ) in a safe and accurate way.
  *
  * It is a weighted version of `logaddexp`, assuming that
  * 𝑠ₓ⋅𝑒ˣ + 𝑠ᵧ⋅𝑒ʸ > 0.
