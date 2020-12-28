@@ -54,7 +54,7 @@ Enter the following command in your terminal:
 curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp bash
 ```
 
-If root privilage is required, please enter the following instead:
+If root privilage is required, please enter the following command instead:
 
 ```bash
 curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp DO_CMD=sudo bash
