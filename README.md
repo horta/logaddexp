@@ -12,6 +12,7 @@ following functions in C:
  * while `logaddexp(1e3, -INFINITY)` will return `1e3`.
  */
 double logaddexp(double x, double y);
+float logaddexpf(float x, float y);
 
 /* Computes ㏒ₑ(𝑠ₓ⋅𝑒ˣ + 𝑠ᵧ⋅𝑒ʸ) in a safe and accurate way.
  *
@@ -19,12 +20,14 @@ double logaddexp(double x, double y);
  * 𝑠ₓ⋅𝑒ˣ + 𝑠ᵧ⋅𝑒ʸ > 0.
  */
 double logaddexps(double x, double y, double sx, double sy);
+float logaddexpsf(float x, float y, float sx, float sy);
 
 /* Computes ㏒ₑ(|𝑐|) and 𝑐/|𝑐|, for 𝑐 = 𝑠ₓ⋅𝑒ˣ + 𝑠ᵧ⋅𝑒ʸ.
  *
  * It is a generalisation of `logaddexps`.
  */
 double logaddexpg(double x, double y, double sx, double sy, double *sign);
+float logaddexpgf(float x, float y, float sx, float sy, float *sign);
 ```
 
 # How to use?
@@ -42,3 +45,25 @@ find_package(logaddexp REQUIRED)
 
 target_link_libraries(mylib PRIVATE LOGADDEXP::logaddexp)
 ```
+
+# Install
+
+Enter the following command in your terminal:
+
+```bash
+curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp bash
+```
+
+If root privilage is required, please enter the following instead:
+
+```bash
+curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp DO_CMD=sudo bash
+```
+
+## Authors
+
+* [Danilo Horta](https://github.com/horta)
+
+## License
+
+This project is licensed under the [MIT License](https://raw.githubusercontent.com/horta/logaddexp/master/LICENSE.md).
