@@ -51,13 +51,7 @@ target_link_libraries(mylib PRIVATE LOGADDEXP::logaddexp)
 Enter the following command in your terminal:
 
 ```bash
-curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp bash
-```
-
-If root privilage is required, please enter the following command instead:
-
-```bash
-curl -fsSL https://git.io/JerYI | GITHUB_USER=horta GITHUB_PROJECT=logaddexp DO_CMD=sudo bash
+/bin/bash -c "$(curl -fsSL https://git.io/JerYI)" -s horta/logaddexp
 ```
 
 ## Authors
