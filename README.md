@@ -34,7 +34,7 @@ float logaddexpgf(float x, float y, float sx, float sy, float *sign);
 
 ## Easiest way
 
-Include `logaddexp.h` in your C/C++ project.
+Include the `include/logaddexp/logaddexp.h` file in your C/C++ project.
 
 ## CMake way
 
@@ -45,6 +45,8 @@ find_package(logaddexp REQUIRED)
 
 target_link_libraries(mylib PRIVATE LOGADDEXP::logaddexp)
 ```
+
+Then add `#include "logaddexp/logaddexp.h"` in your source files.
 
 # Install
 
