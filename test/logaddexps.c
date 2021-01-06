@@ -1,4 +1,4 @@
-#include "logaddexp.h"
+#include "logaddexp/logaddexp.h"
 #include <stddef.h>
 
 #define EPSILON 1e-12
@@ -32,7 +32,6 @@ int test_logaddexps_values(void)
     double sx[] = {1, 2, 3, 4, 5};
     double sy[] = {-1, -1.5, 0, 1.5, 1};
 
-
     for (size_t i = 0; i < 5; ++i) {
         double expected = log(sx[i] * x[i] + sy[i] * y[i]);
         double v = logaddexps(log(x[i]), log(y[i]), sx[i], sy[i]);
@@ -43,10 +42,9 @@ int test_logaddexps_values(void)
     return 0;
 }
 
-
 int test_logaddexps_dbl_max(void)
 {
-    if (fabs(-DBL_MAX -logaddexps(1, 1, 1, -1)) > EPSILON)
+    if (fabs(-DBL_MAX - logaddexps(1, 1, 1, -1)) > EPSILON)
         return 1;
 
     double v = logaddexps(1, 1, 1, -1);

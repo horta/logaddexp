@@ -1,4 +1,4 @@
-#include "logaddexp.h"
+#include "logaddexp/logaddexp.h"
 #include <stddef.h>
 
 #define EPSILON 1e-12
