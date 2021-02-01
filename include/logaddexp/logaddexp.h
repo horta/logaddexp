@@ -2,10 +2,10 @@
 #define LOGADDEXP_H
 
 #define LOGADDEXP_VERSION_MAJOR 2
-#define LOGADDEXP_VERSION_MINOR 0
+#define LOGADDEXP_VERSION_MINOR 1
 #define LOGADDEXP_VERSION_PATCH 0
 
-#define LOGADDEXP_VERSION "2.0.0"
+#define LOGADDEXP_VERSION "2.1.0"
 
 /* For Windows. */
 #define _USE_MATH_DEFINES
@@ -18,7 +18,7 @@
  * For example, `log(exp(1e3) + exp(-INFINITY))` will likely overflow,
  * while `logaddexp(1e3, -INFINITY)` will return `1e3`.
  */
-inline static double logaddexp(double x, double y)
+inline static double logaddexpd(double x, double y)
 {
     double const tmp = x - y;
 
@@ -53,7 +53,7 @@ inline static float logaddexpf(float x, float y)
  * It is a weighted version of `logaddexp`, assuming that
  * 𝑠ₓ⋅𝑒ˣ + 𝑠ᵧ⋅𝑒ʸ > 0.
  */
-inline static double logaddexps(double x, double y, double sx, double sy)
+inline static double logaddexpsd(double x, double y, double sx, double sy)
 {
     double const tmp = x - y;
 
@@ -105,9 +105,9 @@ inline static float logaddexpsf(float x, float y, float sx, float sy)
 
 /* Computes ㏒ₑ(|𝑐|) and 𝑐/|𝑐|, for 𝑐 = 𝑠ₓ⋅𝑒ˣ + 𝑠ᵧ⋅𝑒ʸ.
  *
- * It is a generalisation of `logaddexps`.
+ * It is a generalisation of `logaddexpsd`.
  */
-inline static double logaddexpg(double x, double y, double sx, double sy, double *sign)
+inline static double logaddexpgd(double x, double y, double sx, double sy, double *sign)
 {
     double const sxx = log(fabs(sx)) + x;
     double const syy = log(fabs(sy)) + y;
@@ -139,7 +139,7 @@ inline static double logaddexpg(double x, double y, double sx, double sy, double
 
     sx *= *sign;
     sy *= *sign;
-    return logaddexps(x, y, sx, sy);
+    return logaddexpsd(x, y, sx, sy);
 }
 
 inline static float logaddexpgf(float x, float y, float sx, float sy, float *sign)
@@ -178,11 +178,27 @@ inline static float logaddexpgf(float x, float y, float sx, float sy, float *sig
 }
 
 /**
- * Deprecated since version 1.1.0. Please, use `logaddexpg` instead.
+ * Deprecated since version 1.1.0. Please, use `logaddexpgd` instead.
  */
 inline static double logaddexpss(double x, double y, double sx, double sy, double *sign)
 {
-    return logaddexpg(x, y, sx, sy, sign);
+    return logaddexpgd(x, y, sx, sy, sign);
 }
+
+#define logaddexp(a, b)                                                                \
+    ((sizeof(a) == sizeof(float) && sizeof(b) == sizeof(float)) ? logaddexpf(a, b)     \
+                                                                : logaddexpd(a, b))
+
+#define logaddexps(x, y, sx, sy)                                                       \
+    ((sizeof(x) == sizeof(float) && sizeof(y) == sizeof(float) &&                      \
+      sizeof(sx) == sizeof(float) && sizeof(sy) == sizeof(float))                      \
+         ? logaddexpsf(x, y, sx, sy)                                                   \
+         : logaddexpsd(x, y, sx, sy))
+
+#define logaddexpg(x, y, sx, sy, sign)                                                 \
+    ((sizeof(x) == sizeof(float) && sizeof(y) == sizeof(float) &&                      \
+      sizeof(sx) == sizeof(float) && sizeof(sy) == sizeof(float))                      \
+         ? logaddexpgf(x, y, sx, sy, sign)                                             \
+         : logaddexpgd(x, y, sx, sy, sign))
 
 #endif

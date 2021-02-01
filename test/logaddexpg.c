@@ -41,7 +41,7 @@ int test_logaddexpg_values(void)
         double expected_val = log(fabs(c));
         double expected_sign = c / fabs(c);
         double sign = 0.0;
-        double v = logaddexpg(log(x[i]), log(y[i]), sx[i], sy[i], &sign);
+        double v = logaddexpgd(log(x[i]), log(y[i]), sx[i], sy[i], &sign);
         if (fabs(expected_val - v) > EPSILON)
             return 1;
         if (expected_sign != sign)
@@ -55,7 +55,7 @@ int test_logaddexpg_dbl_max(void)
 {
     double sign = 0.0;
 
-    if (fabs(-DBL_MAX - logaddexpg(1, 1, 1, -1, &sign)) > EPSILON)
+    if (fabs(-DBL_MAX - logaddexpgd(1., 1., 1., -1., &sign)) > EPSILON)
         return 1;
 
     if (1 != sign)
@@ -75,7 +75,7 @@ int test_logaddexpg_range_pos(void)
     double sign = 0.0;
 
     for (size_t i = 0; i < 4; ++i) {
-        if (fabs(z[i] - logaddexpg(x[i], y[i], 1, 1, &sign)) > EPSILON)
+        if (fabs(z[i] - logaddexpgd(x[i], y[i], 1., 1., &sign)) > EPSILON)
             return 1;
         if (signs[i] != sign)
             return 1;
@@ -94,7 +94,7 @@ int test_logaddexpg_range_neg(void)
     double sign = 0.0;
 
     for (size_t i = 0; i < 4; ++i) {
-        if (fabs(z[i] - logaddexpg(x[i], y[i], 1, -1, &sign)) > EPSILON)
+        if (fabs(z[i] - logaddexpgd(x[i], y[i], 1., -1., &sign)) > EPSILON)
             return 1;
         if (signs[i] != sign)
             return 1;
@@ -107,20 +107,20 @@ int test_logaddexpg_hand_made(void)
     double expected = 2.9946394843421738;
     double sign = 0.0;
 
-    if (fabs(expected - logaddexpg(-39.1, 3.1, -3.3, 0.9, &sign)) > EPSILON)
+    if (fabs(expected - logaddexpgd(-39.1, 3.1, -3.3, 0.9, &sign)) > EPSILON)
         return 1;
 
     if (sign != 1)
         return 1;
 
-    if (fabs(expected - logaddexpg(-39.1, 3.1, -3.3, -0.9, &sign)) > EPSILON)
+    if (fabs(expected - logaddexpgd(-39.1, 3.1, -3.3, -0.9, &sign)) > EPSILON)
         return 1;
 
     if (sign != -1)
         return 1;
 
     expected = -3.0440928402878482;
-    if (fabs(expected - logaddexpg(-4., -5., -3.3, 1.9, &sign)) > EPSILON)
+    if (fabs(expected - logaddexpgd(-4., -5., -3.3, 1.9, &sign)) > EPSILON)
         return 1;
 
     if (sign != -1)

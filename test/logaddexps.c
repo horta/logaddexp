@@ -44,11 +44,11 @@ int test_logaddexps_values(void)
 
 int test_logaddexps_dbl_max(void)
 {
-    if (fabs(-DBL_MAX - logaddexps(1, 1, 1, -1)) > EPSILON)
+    if (fabs(-DBL_MAX - logaddexps(1., 1., 1., -1.)) > EPSILON)
         return 1;
 
-    double v = logaddexps(1, 1, 1, -1);
-    if (fabs(1 - logaddexps(v, 1, 1, 1)) > EPSILON)
+    double v = logaddexps(1., 1., 1., -1.);
+    if (fabs(1 - logaddexps(v, 1., 1., 1.)) > EPSILON)
         return 1;
 
     return 0;
@@ -62,7 +62,7 @@ int test_logaddexps_range(void)
     double z[] = {1000200, -1000000, 1000200, -1000000};
 
     for (size_t i = 0; i < 4; ++i) {
-        if (fabs(z[i] - logaddexps(x[i], y[i], 1, 1)) > EPSILON)
+        if (fabs(z[i] - logaddexps(x[i], y[i], 1., 1.)) > EPSILON)
             return 1;
     }
     return 0;
