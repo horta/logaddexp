@@ -184,21 +184,12 @@ inline static double logaddexpss(double x, double y, double sx, double sy, doubl
 {
     return logaddexpgd(x, y, sx, sy, sign);
 }
+#define logaddexp(x, y) _Generic(x, float : logaddexpf((x), (y)), double : logaddexpd((x), (y)))
 
-#define logaddexp(a, b)                                                                \
-    ((sizeof(a) == sizeof(float) && sizeof(b) == sizeof(float)) ? logaddexpf(a, b)     \
-                                                                : logaddexpd(a, b))
+#define logaddexps(x, y, sx, sy)                                                                                       \
+    _Generic(x, float : logaddexpsf((x), (y), (sx), (sy)), double : logaddexpsd((x), (y), (sx), (sy)))
 
-#define logaddexps(x, y, sx, sy)                                                       \
-    ((sizeof(x) == sizeof(float) && sizeof(y) == sizeof(float) &&                      \
-      sizeof(sx) == sizeof(float) && sizeof(sy) == sizeof(float))                      \
-         ? logaddexpsf(x, y, sx, sy)                                                   \
-         : logaddexpsd(x, y, sx, sy))
-
-#define logaddexpg(x, y, sx, sy, sign)                                                 \
-    ((sizeof(x) == sizeof(float) && sizeof(y) == sizeof(float) &&                      \
-      sizeof(sx) == sizeof(float) && sizeof(sy) == sizeof(float))                      \
-         ? logaddexpgf(x, y, sx, sy, sign)                                             \
-         : logaddexpgd(x, y, sx, sy, sign))
+#define logaddexpg(x, y, sx, sy, sign)                                                                                 \
+    _Generic(x, float : logaddexpgf((x), (y), (sx), (sy), (sign)), double : logaddexpgd((x), (y), (sx), (sy), (sign)))
 
 #endif

@@ -30,6 +30,7 @@ target_include_directories(logaddexp
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 target_link_libraries(logaddexp INTERFACE $<$<BOOL:${UNIX}>:m>)
+target_compile_features(logaddexp INTERFACE c_std_11)
 
 install(TARGETS logaddexp EXPORT logaddexp-targets)
 install(DIRECTORY include/ DESTINATION include)

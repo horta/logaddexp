@@ -75,7 +75,7 @@ int test_logaddexp_nan(void)
     if (!isnan(logaddexp(NAN, 0)))
         return 1;
 
-    if (!isnan(logaddexp(0, NAN)))
+    if (!isnan(logaddexp(0., NAN)))
         return 1;
 
     if (!isnan(logaddexp(NAN, NAN)))
