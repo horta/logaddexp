@@ -3,9 +3,9 @@
 
 #define LOGADDEXP_VERSION_MAJOR 2
 #define LOGADDEXP_VERSION_MINOR 1
-#define LOGADDEXP_VERSION_PATCH 0
+#define LOGADDEXP_VERSION_PATCH 1
 
-#define LOGADDEXP_VERSION "2.1.0"
+#define LOGADDEXP_VERSION "2.1.1"
 
 /* For Windows. */
 #define _USE_MATH_DEFINES
@@ -184,12 +184,11 @@ inline static double logaddexpss(double x, double y, double sx, double sy, doubl
 {
     return logaddexpgd(x, y, sx, sy, sign);
 }
-#define logaddexp(x, y) _Generic(x, float : logaddexpf((x), (y)), double : logaddexpd((x), (y)))
+#define logaddexp(x, y) _Generic(x, float : logaddexpf, double : logaddexpd)((x), (y))
 
-#define logaddexps(x, y, sx, sy)                                                                                       \
-    _Generic(x, float : logaddexpsf((x), (y), (sx), (sy)), double : logaddexpsd((x), (y), (sx), (sy)))
+#define logaddexps(x, y, sx, sy) _Generic(x, float : logaddexpsf, double : logaddexpsd)((x), (y), (sx), (sy))
 
 #define logaddexpg(x, y, sx, sy, sign)                                                                                 \
-    _Generic(x, float : logaddexpgf((x), (y), (sx), (sy), (sign)), double : logaddexpgd((x), (y), (sx), (sy), (sign)))
+    _Generic(x, float : logaddexpgf, double : logaddexpgd)((x), (y), (sx), (sy), (sign))
 
 #endif
