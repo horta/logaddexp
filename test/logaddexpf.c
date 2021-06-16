@@ -1,7 +1,7 @@
 #include "logaddexp/logaddexp.h"
 #include <stddef.h>
 
-#define EPSILON 1e-12
+#define EPSILON 1e-6f
 
 int test_logaddexpf_values(void);
 int test_logaddexpf_range(void);

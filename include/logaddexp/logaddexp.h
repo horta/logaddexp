@@ -38,7 +38,7 @@ inline static float logaddexpf(float x, float y)
     float const tmp = x - y;
 
     if (x == y)
-        return x + M_LN2;
+        return (float)(x + M_LN2);
 
     if (tmp > 0)
         return x + log1pf(expf(-tmp));
@@ -87,7 +87,7 @@ inline static float logaddexpsf(float x, float y, float sx, float sy)
 
     if (sxx == syy) {
         if (sx * sy > 0)
-            return sxx + M_LN2;
+            return (float)(sxx + M_LN2);
         return -FLT_MAX;
     }
 
@@ -153,7 +153,7 @@ inline static float logaddexpgf(float x, float y, float sx, float sy, float *sig
                 *sign = +1.0;
             else
                 *sign = -1.0;
-            return sxx + M_LN2;
+            return (float)(sxx + M_LN2);
         } else {
             *sign = 1.0;
             return -FLT_MAX;

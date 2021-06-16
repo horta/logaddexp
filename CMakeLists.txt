@@ -13,7 +13,8 @@ set(PROJECT_DESCRIPTION "Implements the logarithm of the sum of exponentiations.
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(${CMAKE_C_COMPILER_ID} MATCHES "MSVC")
-    set(WARNING_FLAGS /W3)
+    # /wd5105: https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/c5105?view=msvc-160
+    set(WARNING_FLAGS /W3 /wd5105)
 else()
     set(WARNING_FLAGS -Wall -Wextra -pedantic -Wstrict-prototypes -Wshadow
         -Wconversion -Wmissing-prototypes -Wno-unused-parameter -Wsign-conversion

@@ -1,7 +1,7 @@
 #include "logaddexp/logaddexp.h"
 #include <stddef.h>
 
-#define EPSILON 1e-6
+#define EPSILON 1e-6f
 
 int test_logaddexpsf_values(void);
 int test_logaddexpsf_flt_max(void);
