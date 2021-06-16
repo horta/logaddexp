@@ -37,4 +37,6 @@ jobs:
     - name: Install
       working-directory: ${{github.workspace}}/build
       shell: bash
-      run: sudo cmake --build . --target install --config $BUILD_TYPE
+      run: |
+        if type sudo >/dev/null 2>&1; then SUDO="sudo"; else SUDO=""; fi
+        $SUDO cmake --build . --target install --config $BUILD_TYPE
