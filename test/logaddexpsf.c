@@ -70,13 +70,13 @@ int test_logaddexpsf_range(void)
 
 int test_logaddexpsf_hand_made(void)
 {
-    float expected = 2.9946394843421738;
+    float expected = 2.9946394843421738f;
 
-    if (fabsf(expected - logaddexpsf(-39.1, 3.1, -3.3, 0.9)) > EPSILON)
+    if (fabsf(expected - logaddexpsf(-39.1f, 3.1f, -3.3f, 0.9f)) > EPSILON)
         return 1;
 
-    expected = -7.470820903793559;
-    if (fabsf(expected - logaddexpsf(-4., -5., -0.3, 0.9)) > EPSILON)
+    expected = -7.470820903793559f;
+    if (fabsf(expected - logaddexpsf(-4.f, -5.f, -0.3f, 0.9f)) > EPSILON)
         return 1;
 
     return 0;
