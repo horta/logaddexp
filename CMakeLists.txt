@@ -33,6 +33,12 @@ target_include_directories(logaddexp
 )
 target_link_libraries(logaddexp INTERFACE $<$<BOOL:${UNIX}>:m>)
 target_compile_features(logaddexp INTERFACE c_std_11)
+# If you define this macro, functionality described in the X/Open
+# Guide is included. This is a superset of the POSIX.1 and POSIX.2
+# functionality and in fact _POSIX_SOURCE and _POSIX_C_SOURCE
+# automatically defined.
+target_compile_definitions(logaddexp PRIVATE _XOPEN_SOURCE=1)
+set(CMAKE_REQUIRED_DEFINITIONS ${CMAKE_REQUIRED_DEFINITIONS};-D_XOPEN_SOURCE=1)
 
 install(TARGETS logaddexp EXPORT logaddexp-targets)
 install(DIRECTORY include/ DESTINATION include)
