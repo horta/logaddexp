@@ -53,7 +53,7 @@ Then add `#include "logaddexp/logaddexp.h"` in your source files.
 Enter the following command in your terminal:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://git.io/JerYI)" -s horta/logaddexp
+/bin/bash -c "$(curl -fsSL https://git.io/Jz7Oa)" -s horta/logaddexp
 ```
 
 ## Authors
