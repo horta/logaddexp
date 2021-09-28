@@ -5,10 +5,6 @@ on: push
 env:
   BUILD_TYPE: Release
 
-defaults:
-  run:
-    shell: bash
-
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -20,11 +16,13 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Check for sudo
+      shell: bash
       run: |
         if type sudo >/dev/null 2>&1; then SUDO="sudo"; else SUDO=""; fi
         echo "SUDO=$SUDO" >> $GITHUB_ENV
 
     - name: Install dependencies
+      shell: bash
       run: if [ -f install-deps ]; then $SUDO ./install-deps; fi
 
     - name: Configure CMake
