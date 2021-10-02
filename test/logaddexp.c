@@ -8,7 +8,7 @@ int test_logaddexp_range(void);
 int test_logaddexp_inf(void);
 int test_logaddexp_nan(void);
 
-int main()
+int main(void)
 {
     if (test_logaddexp_values())
         return 1;

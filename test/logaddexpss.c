@@ -9,7 +9,7 @@ int test_logaddexpss_range_pos(void);
 int test_logaddexpss_range_neg(void);
 int test_logaddexpss_hand_made(void);
 
-int main()
+int main(void)
 {
     if (test_logaddexpss_values())
         return 1;

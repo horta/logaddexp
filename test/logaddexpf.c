@@ -8,7 +8,7 @@ int test_logaddexpf_range(void);
 int test_logaddexpf_inf(void);
 int test_logaddexpf_nan(void);
 
-int main()
+int main(void)
 {
     if (test_logaddexpf_values())
         return 1;

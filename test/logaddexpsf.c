@@ -8,7 +8,7 @@ int test_logaddexpsf_flt_max(void);
 int test_logaddexpsf_range(void);
 int test_logaddexpsf_hand_made(void);
 
-int main()
+int main(void)
 {
     if (test_logaddexpsf_values())
         return 1;

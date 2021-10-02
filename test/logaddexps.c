@@ -8,7 +8,7 @@ int test_logaddexps_dbl_max(void);
 int test_logaddexps_range(void);
 int test_logaddexps_hand_made(void);
 
-int main()
+int main(void)
 {
     if (test_logaddexps_values())
         return 1;
