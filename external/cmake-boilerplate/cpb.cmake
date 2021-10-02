@@ -94,5 +94,5 @@ macro(cbp_generate_export_header tgt export_file)
     EXPORT_MACRO_NAME
     ${TGT}_API
     EXPORT_FILE_NAME
-    ${export_file})
+    ${${export_file}})
 endmacro()
