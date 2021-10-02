@@ -64,3 +64,13 @@ macro(cbp_ci_build_option)
     endif()
   endif()
 endmacro()
+
+macro(cbp_set_rpath)
+  set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+  # Set RPATH only if it's not a system directory
+  list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES
+       "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
+  if("${isSystemDir}" STREQUAL "-1")
+    set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+  endif()
+endmacro()
