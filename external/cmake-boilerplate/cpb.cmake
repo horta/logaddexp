@@ -80,3 +80,18 @@ function(cbp_hide_functions tgt)
   set_property(TARGET ${tgt} PROPERTY C_VISIBILITY_PRESET hidden)
   set_property(TARGET ${tgt} PROPERTY VISIBILITY_INLINES_HIDDEN ON)
 endfunction()
+
+function(cbp_generate_export_header tgt)
+  string(TOUPPER ${tgt} TGT)
+  include(GenerateExportHeader)
+  generate_export_header(
+    ${tgt}
+    BASE_NAME
+    ${TGT}
+    INCLUDE_GUARD_NAME
+    ${TGT}_EXPORT_H
+    EXPORT_MACRO_NAME
+    ${TGT}_API
+    EXPORT_FILE_NAME
+    ${CMAKE_CURRENT_BINARY_DIR}/${tgt}/export.h)
+endfunction()
