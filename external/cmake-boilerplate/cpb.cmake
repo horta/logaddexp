@@ -74,3 +74,9 @@ macro(cbp_set_rpath)
     set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
   endif()
 endmacro()
+
+function(cbp_hide_functions tgt)
+  # Hide functions by default.
+  set_property(TARGET ${tgt} PROPERTY C_VISIBILITY_PRESET hidden)
+  set_property(TARGET ${tgt} PROPERTY VISIBILITY_INLINES_HIDDEN ON)
+endfunction()
