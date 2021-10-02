@@ -1,4 +1,4 @@
-function(bp_install tgt hdr_place)
+function(cbp_install tgt hdr_place)
   install(TARGETS ${tgt} EXPORT ${tgt}-targets)
 
   if(hdr_place STREQUAL "SEPARATE")
