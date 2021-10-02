@@ -1,12 +1,6 @@
 #ifndef LOGADDEXP_H
 #define LOGADDEXP_H
 
-#define LOGADDEXP_VERSION_MAJOR 2
-#define LOGADDEXP_VERSION_MINOR 1
-#define LOGADDEXP_VERSION_PATCH 3
-
-#define LOGADDEXP_VERSION "2.1.3"
-
 /* For Windows. */
 #define _USE_MATH_DEFINES
 
