@@ -3,61 +3,48 @@ cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 # Fetch version from header
 set(VERSION_REGEX "#define LOGADDEXP_VERSION[ \t]+\"(.+)\"")
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/include/logaddexp/logaddexp.h"
-  VERSION_STRING REGEX ${VERSION_REGEX})
+     VERSION_STRING REGEX ${VERSION_REGEX})
 string(REGEX REPLACE ${VERSION_REGEX} "\\1" VERSION_STRING "${VERSION_STRING}")
 
-project(logaddexp LANGUAGES C VERSION ${VERSION_STRING})
-set(PROJECT_DESCRIPTION "Implements the logarithm of the sum of exponentiations.")
+project(
+  logaddexp
+  LANGUAGES C
+  VERSION ${VERSION_STRING})
 
 # Generate compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-message(STATUS "COMPILER ID ${CMAKE_C_COMPILER_ID}")
 
 if(CMAKE_C_COMPILER_ID STREQUAL "MSVC")
-    # /wd5105: https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/c5105?view=msvc-160
-    set(WARNING_FLAGS /W3 /wd5105)
+  # /wd5105:
+  # https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/c5105?view=msvc-160
+  set(WARNING_FLAGS /W3 /wd5105)
 else()
-    set(WARNING_FLAGS -Wall -Wextra -pedantic -Wstrict-prototypes -Wshadow
-        -Wconversion -Wmissing-prototypes -Wno-unused-parameter -Wsign-conversion
-        -Wno-unused-function # TODO: added only to please clangd for now
-        -Wno-empty-translation-unit # TODO: added only to please clangd for now
-    )
+  set(WARNING_FLAGS
+      -Wall
+      -Wextra
+      -pedantic
+      -Wstrict-prototypes
+      -Wshadow
+      -Wconversion
+      -Wmissing-prototypes
+      -Wno-unused-parameter
+      -Wsign-conversion
+      -Wno-unused-function # TODO: added only to please clangd for now
+      -Wno-empty-translation-unit # TODO: added only to please clangd for now
+  )
 endif()
 
 add_library(logaddexp INTERFACE)
 add_library(LOGADDEXP::logaddexp ALIAS logaddexp)
-target_include_directories(logaddexp
-  INTERFACE
-    $<INSTALL_INTERFACE:include>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-)
+target_include_directories(
+  logaddexp INTERFACE $<INSTALL_INTERFACE:include>
+                      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_link_libraries(logaddexp INTERFACE $<$<BOOL:${UNIX}>:m>)
 target_compile_features(logaddexp INTERFACE c_std_11)
-# If you define this macro, functionality described in the X/Open
-# Guide is included. This is a superset of the POSIX.1 and POSIX.2
-# functionality and in fact _POSIX_SOURCE and _POSIX_C_SOURCE
-# automatically defined.
 target_compile_definitions(logaddexp INTERFACE _XOPEN_SOURCE=1)
-set(CMAKE_REQUIRED_DEFINITIONS ${CMAKE_REQUIRED_DEFINITIONS};-D_XOPEN_SOURCE=1)
 
-install(TARGETS logaddexp EXPORT logaddexp-targets)
-install(DIRECTORY include/ DESTINATION include)
-
-# Export the targets to a script
-install(EXPORT logaddexp-targets
-    FILE logaddexp-targets.cmake
-    NAMESPACE LOGADDEXP::
-    DESTINATION lib/cmake/logaddexp
-)
-include(CMakePackageConfigHelpers)
-configure_package_config_file(logaddexp-config.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/logaddexp-config.cmake
-    INSTALL_DESTINATION lib/cmake/logaddexp
-    NO_SET_AND_CHECK_MACRO
-)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/logaddexp-config.cmake
-    DESTINATION lib/cmake/logaddexp
-)
+include(external/cmake-boilerplate/install.cmake)
+cbp_install(logaddexp SEPARATE)
 
 enable_testing()
 add_subdirectory(test)

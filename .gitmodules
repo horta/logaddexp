@@ -1,0 +1,3 @@
+[submodule "external/cmake-boilerplate"]
+	path = external/cmake-boilerplate
+	url = https://github.com/horta/cmake-boilerplate
