@@ -81,7 +81,8 @@ function(cbp_hide_functions tgt)
   set_property(TARGET ${tgt} PROPERTY VISIBILITY_INLINES_HIDDEN ON)
 endfunction()
 
-function(cbp_generate_export_header tgt)
+macro(cbp_generate_export_header tgt export_file)
+  set(${export_file} ${CMAKE_CURRENT_BINARY_DIR}/${tgt}/export.h)
   string(TOUPPER ${tgt} TGT)
   include(GenerateExportHeader)
   generate_export_header(
@@ -93,5 +94,5 @@ function(cbp_generate_export_header tgt)
     EXPORT_MACRO_NAME
     ${TGT}_API
     EXPORT_FILE_NAME
-    ${CMAKE_CURRENT_BINARY_DIR}/${tgt}/export.h)
-endfunction()
+    ${export_file})
+endmacro()
