@@ -76,9 +76,13 @@ macro(cbp_set_rpath)
 endmacro()
 
 function(cbp_hide_functions tgt)
-  # Hide functions by default.
-  set_property(TARGET ${tgt} PROPERTY C_VISIBILITY_PRESET hidden)
-  set_property(TARGET ${tgt} PROPERTY VISIBILITY_INLINES_HIDDEN ON)
+  # merge request fix:
+  # https://gitlab.kitware.com/cmake/cmake/-/merge_requests/1799
+  if(CMAKE_VERSION VERSION_GREATER 3.12.0)
+    # Hide functions by default.
+    set_property(TARGET ${tgt} PROPERTY C_VISIBILITY_PRESET hidden)
+    set_property(TARGET ${tgt} PROPERTY VISIBILITY_INLINES_HIDDEN ON)
+  endif()
 endfunction()
 
 macro(cbp_generate_export_header tgt export_file)
