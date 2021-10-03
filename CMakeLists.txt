@@ -7,8 +7,7 @@ project(
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(external/cmake-boilerplate/cpb.cmake)
-
+include(external/cmake-boilerplate/cbp.cmake)
 cbp_set_warning_flags()
 cbp_ci_build_option()
 
