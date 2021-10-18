@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 project(
   logaddexp
   LANGUAGES C
-  VERSION 2.1.4)
+  VERSION 2.1.5)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
