@@ -39,6 +39,10 @@ configure_package_config_file(
 
 install(FILES ${CMAKE_CONFIG_FILE} DESTINATION lib/cmake/${PROJECT_NAME})
 
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md
+              ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.md
+        DESTINATION share/docs/${PROJECT_NAME})
+
 enable_testing()
 add_subdirectory(test)
 
