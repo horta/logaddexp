@@ -1,10 +1,9 @@
-cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
 
 project(
   logaddexp
   LANGUAGES C
-  VERSION 2.1.6
-)
+  VERSION 2.1.7)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -16,8 +15,7 @@ add_library(logaddexp INTERFACE)
 add_library(LOGADDEXP::logaddexp ALIAS logaddexp)
 target_include_directories(
   logaddexp INTERFACE $<INSTALL_INTERFACE:include>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-)
+                      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_link_libraries(logaddexp INTERFACE $<$<BOOL:${UNIX}>:m>)
 target_compile_features(logaddexp INTERFACE c_std_11)
 
@@ -28,7 +26,8 @@ add_subdirectory(test)
 
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
 set(CPACK_PACKAGE_VENDOR "Danilo Horta")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "C library that implements the logarithm of the sum of exponentiations")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
+    "C library that implements the logarithm of the sum of exponentiations")
 set(CPACK_PACKAGE_CONTACT "Danilo Horta")
 set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
