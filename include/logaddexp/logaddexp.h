@@ -7,6 +7,10 @@
 #include <float.h>
 #include <math.h>
 
+#ifndef M_LN2
+#define M_LN2 0.69314718055994530942 /* log_e 2 */
+#endif
+
 /* Computes ㏒ₑ(𝑒ˣ + 𝑒ʸ) in a safe and accurate way.
  *
  * For example, `log(exp(1e3) + exp(-INFINITY))` will likely overflow,

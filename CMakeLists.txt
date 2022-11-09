@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
 project(
   logaddexp
   LANGUAGES C
-  VERSION 2.1.9)
+  VERSION 2.1.10)
 
 set(LOGADDEXP_MAIN_PROJECT OFF)
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
@@ -22,6 +22,7 @@ message(STATUS "LOGADDEXP_MAIN_PROJECT: " ${LOGADDEXP_MAIN_PROJECT})
 message(STATUS "LOGADDEXP_BUILD_TESTS: " ${LOGADDEXP_BUILD_TESTS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_C_EXTENSIONS OFF)
 
 include(cmake/compiler-options.cmake)
 include(cmake/sanitizers.cmake)

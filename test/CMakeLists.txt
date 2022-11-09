@@ -6,7 +6,6 @@ function(logaddexp_add_test name)
   target_compile_options(${target} PRIVATE ${WARNING_FLAGS})
   target_compile_definitions(${target} PRIVATE $<$<BOOL:${WIN32}>:_CRT_SECURE_NO_WARNINGS>)
   target_compile_definitions(${target} PRIVATE $<$<BOOL:${WIN32}>:_CRT_NONSTDC_NO_DEPRECATE>)
-  target_compile_definitions(${target} PRIVATE _XOPEN_SOURCE=700)
   add_test(NAME ${name} COMMAND ${target})
 endfunction()
 
