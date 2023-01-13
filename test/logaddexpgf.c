@@ -11,20 +11,15 @@ int test_logaddexpgf_hand_made(void);
 
 int main(void)
 {
-    if (test_logaddexpgf_values())
-        return 1;
+    if (test_logaddexpgf_values()) return 1;
 
-    if (test_logaddexpgf_flt_max())
-        return 1;
+    if (test_logaddexpgf_flt_max()) return 1;
 
-    if (test_logaddexpgf_range_pos())
-        return 1;
+    if (test_logaddexpgf_range_pos()) return 1;
 
-    if (test_logaddexpgf_range_neg())
-        return 1;
+    if (test_logaddexpgf_range_neg()) return 1;
 
-    if (test_logaddexpgf_hand_made())
-        return 1;
+    if (test_logaddexpgf_hand_made()) return 1;
 
     return 0;
 }
@@ -36,16 +31,15 @@ int test_logaddexpgf_values(void)
     float sx[] = {1, 2, 3, 4, 5};
     float sy[] = {-1, -1.5, 0, 1.5, 1};
 
-    for (size_t i = 0; i < 5; ++i) {
+    for (size_t i = 0; i < 5; ++i)
+    {
         float c = sx[i] * x[i] + sy[i] * y[i];
         float expected_val = logf(fabsf(c));
         float expected_sign = c / fabsf(c);
         float sign = 0.0;
         float v = logaddexpgf(logf(x[i]), logf(y[i]), sx[i], sy[i], &sign);
-        if (fabsf(expected_val - v) > EPSILON)
-            return 1;
-        if (expected_sign != sign)
-            return 1;
+        if (fabsf(expected_val - v) > EPSILON) return 1;
+        if (expected_sign != sign) return 1;
     }
 
     return 0;
@@ -58,8 +52,7 @@ int test_logaddexpgf_flt_max(void)
     if (fabsf(-FLT_MAX - logaddexpgf(1.f, 1.f, 1.f, -1.f, &sign)) > EPSILON)
         return 1;
 
-    if (1 != sign)
-        return 1;
+    if (1 != sign) return 1;
 
     return 0;
 }
@@ -74,11 +67,11 @@ int test_logaddexpgf_range_pos(void)
 
     float sign = 0.0;
 
-    for (size_t i = 0; i < 4; ++i) {
+    for (size_t i = 0; i < 4; ++i)
+    {
         if (fabsf(z[i] - logaddexpgf(x[i], y[i], 1, 1, &sign)) > EPSILON)
             return 1;
-        if (signs[i] != sign)
-            return 1;
+        if (signs[i] != sign) return 1;
     }
     return 0;
 }
@@ -93,11 +86,11 @@ int test_logaddexpgf_range_neg(void)
 
     float sign = 0.0;
 
-    for (size_t i = 0; i < 4; ++i) {
+    for (size_t i = 0; i < 4; ++i)
+    {
         if (fabsf(z[i] - logaddexpgf(x[i], y[i], 1.f, -1.f, &sign)) > EPSILON)
             return 1;
-        if (signs[i] != sign)
-            return 1;
+        if (signs[i] != sign) return 1;
     }
     return 0;
 }
@@ -107,24 +100,23 @@ int test_logaddexpgf_hand_made(void)
     float expected = 2.9946394843421738f;
     float sign = 0.0;
 
-    if (fabsf(expected - logaddexpgf(-39.1f, 3.1f, -3.3f, 0.9f, &sign)) > EPSILON)
+    if (fabsf(expected - logaddexpgf(-39.1f, 3.1f, -3.3f, 0.9f, &sign)) >
+        EPSILON)
         return 1;
 
-    if (sign != 1)
+    if (sign != 1) return 1;
+
+    if (fabsf(expected - logaddexpgf(-39.1f, 3.1f, -3.3f, -0.9f, &sign)) >
+        EPSILON)
         return 1;
 
-    if (fabsf(expected - logaddexpgf(-39.1f, 3.1f, -3.3f, -0.9f, &sign)) > EPSILON)
-        return 1;
-
-    if (sign != -1)
-        return 1;
+    if (sign != -1) return 1;
 
     expected = -3.0440928402878482f;
     if (fabsf(expected - logaddexpgf(-4.f, -5.f, -3.3f, 1.9f, &sign)) > EPSILON)
         return 1;
 
-    if (sign != -1)
-        return 1;
+    if (sign != -1) return 1;
 
     return 0;
 }

@@ -10,17 +10,13 @@ int test_logaddexpsf_hand_made(void);
 
 int main(void)
 {
-    if (test_logaddexpsf_values())
-        return 1;
+    if (test_logaddexpsf_values()) return 1;
 
-    if (test_logaddexpsf_flt_max())
-        return 1;
+    if (test_logaddexpsf_flt_max()) return 1;
 
-    if (test_logaddexpsf_range())
-        return 1;
+    if (test_logaddexpsf_range()) return 1;
 
-    if (test_logaddexpsf_hand_made())
-        return 1;
+    if (test_logaddexpsf_hand_made()) return 1;
 
     return 0;
 }
@@ -32,11 +28,11 @@ int test_logaddexpsf_values(void)
     float sx[] = {1, 2, 3, 4, 5};
     float sy[] = {-1, -1.5, 0, 1.5, 1};
 
-    for (size_t i = 0; i < 5; ++i) {
+    for (size_t i = 0; i < 5; ++i)
+    {
         float expected = logf(sx[i] * x[i] + sy[i] * y[i]);
         float v = logaddexpsf(logf(x[i]), logf(y[i]), sx[i], sy[i]);
-        if (fabsf(expected - v) > EPSILON)
-            return 1;
+        if (fabsf(expected - v) > EPSILON) return 1;
     }
 
     return 0;
@@ -44,12 +40,10 @@ int test_logaddexpsf_values(void)
 
 int test_logaddexpsf_flt_max(void)
 {
-    if (fabsf(-FLT_MAX - logaddexpsf(1, 1, 1, -1)) > EPSILON)
-        return 1;
+    if (fabsf(-FLT_MAX - logaddexpsf(1, 1, 1, -1)) > EPSILON) return 1;
 
     float v = logaddexpsf(1, 1, 1, -1);
-    if (fabsf(1 - logaddexpsf(v, 1, 1, 1)) > EPSILON)
-        return 1;
+    if (fabsf(1 - logaddexpsf(v, 1, 1, 1)) > EPSILON) return 1;
 
     return 0;
 }
@@ -61,9 +55,9 @@ int test_logaddexpsf_range(void)
     float y[] = {1000200, -1000200, 1000000, -1000000};
     float z[] = {1000200, -1000000, 1000200, -1000000};
 
-    for (size_t i = 0; i < 4; ++i) {
-        if (fabsf(z[i] - logaddexpsf(x[i], y[i], 1, 1)) > EPSILON)
-            return 1;
+    for (size_t i = 0; i < 4; ++i)
+    {
+        if (fabsf(z[i] - logaddexpsf(x[i], y[i], 1, 1)) > EPSILON) return 1;
     }
     return 0;
 }

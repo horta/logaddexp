@@ -58,7 +58,7 @@ Enter the following command in your terminal:
 
 ## Authors
 
-* [Danilo Horta](https://github.com/horta)
+- [Danilo Horta](https://github.com/horta)
 
 ## License
 

@@ -20,8 +20,7 @@ inline static double logaddexpd(double x, double y)
 {
     double const tmp = x - y;
 
-    if (x == y)
-        return x + M_LN2;
+    if (x == y) return x + M_LN2;
 
     if (tmp > 0)
         return x + log1p(exp(-tmp));
@@ -35,8 +34,7 @@ inline static float logaddexpf(float x, float y)
 {
     float const tmp = x - y;
 
-    if (x == y)
-        return (float)(x + M_LN2);
+    if (x == y) return (float)(x + M_LN2);
 
     if (tmp > 0)
         return x + log1pf(expf(-tmp));
@@ -58,18 +56,20 @@ inline static double logaddexpsd(double x, double y, double sx, double sy)
     double const sxx = log(fabs(sx)) + x;
     double const syy = log(fabs(sy)) + y;
 
-    if (sxx == syy) {
-        if (sx * sy > 0)
-            return sxx + M_LN2;
+    if (sxx == syy)
+    {
+        if (sx * sy > 0) return sxx + M_LN2;
         return -DBL_MAX;
     }
 
-    if (sx > 0 && sy > 0) {
+    if (sx > 0 && sy > 0)
+    {
         if (tmp > 0)
             return sxx + log1p((sy / sx) * exp(-tmp));
         else if (tmp <= 0)
             return syy + log1p((sx / sy) * exp(tmp));
-    } else if (sx > 0)
+    }
+    else if (sx > 0)
         return sxx + log1p((sy / sx) * exp(-tmp));
     else
         return syy + log1p((sx / sy) * exp(tmp));
@@ -83,18 +83,20 @@ inline static float logaddexpsf(float x, float y, float sx, float sy)
     float const sxx = logf(fabsf(sx)) + x;
     float const syy = logf(fabsf(sy)) + y;
 
-    if (sxx == syy) {
-        if (sx * sy > 0)
-            return (float)(sxx + M_LN2);
+    if (sxx == syy)
+    {
+        if (sx * sy > 0) return (float)(sxx + M_LN2);
         return -FLT_MAX;
     }
 
-    if (sx > 0 && sy > 0) {
+    if (sx > 0 && sy > 0)
+    {
         if (tmp > 0)
             return sxx + log1pf((sy / sx) * expf(-tmp));
         else if (tmp <= 0)
             return syy + log1pf((sx / sy) * expf(tmp));
-    } else if (sx > 0)
+    }
+    else if (sx > 0)
         return sxx + log1pf((sy / sx) * expf(-tmp));
     else
         return syy + log1pf((sx / sy) * expf(tmp));
@@ -105,30 +107,38 @@ inline static float logaddexpsf(float x, float y, float sx, float sy)
  *
  * It is a generalisation of `logaddexpsd`.
  */
-inline static double logaddexpgd(double x, double y, double sx, double sy, double *sign)
+inline static double logaddexpgd(double x, double y, double sx, double sy,
+                                 double *sign)
 {
     double const sxx = log(fabs(sx)) + x;
     double const syy = log(fabs(sy)) + y;
 
-    if (sxx == syy) {
-        if (sx * sy > 0) {
+    if (sxx == syy)
+    {
+        if (sx * sy > 0)
+        {
             if (sx > 0)
                 *sign = +1.0;
             else
                 *sign = -1.0;
             return sxx + M_LN2;
-        } else {
+        }
+        else
+        {
             *sign = 1.0;
             return -DBL_MAX;
         }
     }
 
-    if (sxx > syy) {
+    if (sxx > syy)
+    {
         if (sx >= 0.0)
             *sign = +1.0;
         else
             *sign = -1.0;
-    } else {
+    }
+    else
+    {
         if (sy >= 0.0)
             *sign = +1.0;
         else
@@ -140,30 +150,38 @@ inline static double logaddexpgd(double x, double y, double sx, double sy, doubl
     return logaddexpsd(x, y, sx, sy);
 }
 
-inline static float logaddexpgf(float x, float y, float sx, float sy, float *sign)
+inline static float logaddexpgf(float x, float y, float sx, float sy,
+                                float *sign)
 {
     float const sxx = logf(fabsf(sx)) + x;
     float const syy = logf(fabsf(sy)) + y;
 
-    if (sxx == syy) {
-        if (sx * sy > 0) {
+    if (sxx == syy)
+    {
+        if (sx * sy > 0)
+        {
             if (sx > 0)
                 *sign = +1.0;
             else
                 *sign = -1.0;
             return (float)(sxx + M_LN2);
-        } else {
+        }
+        else
+        {
             *sign = 1.0;
             return -FLT_MAX;
         }
     }
 
-    if (sxx > syy) {
+    if (sxx > syy)
+    {
         if (sx >= 0.0)
             *sign = +1.0;
         else
             *sign = -1.0;
-    } else {
+    }
+    else
+    {
         if (sy >= 0.0)
             *sign = +1.0;
         else
@@ -178,15 +196,20 @@ inline static float logaddexpgf(float x, float y, float sx, float sy, float *sig
 /**
  * Deprecated since version 1.1.0. Please, use `logaddexpgd` instead.
  */
-inline static double logaddexpss(double x, double y, double sx, double sy, double *sign)
+inline static double logaddexpss(double x, double y, double sx, double sy,
+                                 double *sign)
 {
     return logaddexpgd(x, y, sx, sy, sign);
 }
-#define logaddexp(x, y) _Generic(x, float : logaddexpf, double : logaddexpd)((x), (y))
+#define logaddexp(x, y)                                                        \
+    _Generic(x, float : logaddexpf, double : logaddexpd)((x), (y))
 
-#define logaddexps(x, y, sx, sy) _Generic(x, float : logaddexpsf, double : logaddexpsd)((x), (y), (sx), (sy))
+#define logaddexps(x, y, sx, sy)                                               \
+    _Generic(x, float : logaddexpsf, double : logaddexpsd)((x), (y), (sx), (sy))
 
-#define logaddexpg(x, y, sx, sy, sign)                                                                                 \
-    _Generic(x, float : logaddexpgf, double : logaddexpgd)((x), (y), (sx), (sy), (sign))
+#define logaddexpg(x, y, sx, sy, sign)                                         \
+    _Generic(x, float                                                          \
+             : logaddexpgf, double                                             \
+             : logaddexpgd)((x), (y), (sx), (sy), (sign))
 
 #endif
