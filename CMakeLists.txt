@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
 project(
   logaddexp
   LANGUAGES C
-  VERSION 2.1.13)
+  VERSION 2.1.14)
 set(PROJECT_DESCRIPTION "Logarithm of the sum of exponentiations.")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
