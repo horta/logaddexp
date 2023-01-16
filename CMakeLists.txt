@@ -1,25 +1,9 @@
 cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
-
 project(
   logaddexp
   LANGUAGES C
-  VERSION 2.1.12)
-
-set(LOGADDEXP_MAIN_PROJECT OFF)
-if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
-  set(LOGADDEXP_MAIN_PROJECT ON)
-endif()
-
-if(LOGADDEXP_MAIN_PROJECT)
-  set(LOGADDEXP_BUILD_TESTS_DEFAULT ON)
-else()
-  set(LOGADDEXP_BUILD_TESTS_DEFAULT OFF)
-endif()
-
-option(LOGADDEXP_BUILD_TESTS "Build the unit tests"
-       ${LOGADDEXP_BUILD_TESTS_DEFAULT})
-message(STATUS "LOGADDEXP_MAIN_PROJECT: " ${LOGADDEXP_MAIN_PROJECT})
-message(STATUS "LOGADDEXP_BUILD_TESTS: " ${LOGADDEXP_BUILD_TESTS})
+  VERSION 2.1.13)
+set(PROJECT_DESCRIPTION "Logarithm of the sum of exponentiations.")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_C_STANDARD 11)
@@ -32,42 +16,43 @@ add_library(logaddexp INTERFACE)
 add_library(LOGADDEXP::logaddexp ALIAS logaddexp)
 
 target_include_directories(
-  logaddexp
-  INTERFACE $<INSTALL_INTERFACE:include>
-            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+  logaddexp INTERFACE $<INSTALL_INTERFACE:include>
+                      $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
+
 target_link_libraries(logaddexp INTERFACE $<$<BOOL:${UNIX}>:m>)
-target_compile_features(logaddexp INTERFACE c_std_11)
+set_target_properties(logaddexp PROPERTIES VERSION ${PROJECT_VERSION})
+target_compile_options(logaddexp PRIVATE ${WARNING_FLAGS})
 
 install(TARGETS logaddexp EXPORT logaddexp-targets)
-
 install(DIRECTORY include/logaddexp/ DESTINATION include/logaddexp)
 
+export(
+  TARGETS logaddexp
+  NAMESPACE LOGADDEXP::
+  FILE logaddexp-targets.cmake)
 install(
   EXPORT logaddexp-targets
-  FILE logaddexp-targets.cmake
   NAMESPACE LOGADDEXP::
   DESTINATION lib/cmake/logaddexp)
 
-include(CMakePackageConfigHelpers)
-
-set(CMAKE_CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/logaddexp-config.cmake)
-configure_package_config_file(
-  logaddexp-config.cmake.in ${CMAKE_CONFIG_FILE}
-  INSTALL_DESTINATION lib/cmake/logaddexp)
-
-set(CMAKE_VERSION_FILE ${CMAKE_CURRENT_BINARY_DIR}/logaddexp-config-version.cmake)
-write_basic_package_version_file(${CMAKE_VERSION_FILE}
-                                 COMPATIBILITY SameMajorVersion)
-
-install(FILES ${CMAKE_CONFIG_FILE}
-              ${CMAKE_VERSION_FILE}
-        DESTINATION lib/cmake/logaddexp)
-
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md
-              ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.md
+install(FILES ${PROJECT_SOURCE_DIR}/README.md ${PROJECT_SOURCE_DIR}/LICENSE.md
         DESTINATION share/docs/logaddexp)
 
-if(LOGADDEXP_BUILD_TESTS)
+include(CMakePackageConfigHelpers)
+
+set(project_config ${PROJECT_BINARY_DIR}/logaddexp-config.cmake)
+set(version_config ${PROJECT_BINARY_DIR}/logaddexp-config-version.cmake)
+
+configure_package_config_file(logaddexp-config.cmake.in ${project_config}
+                              INSTALL_DESTINATION lib/cmake/logaddexp)
+
+write_basic_package_version_file(${version_config}
+                                 COMPATIBILITY SameMajorVersion)
+
+install(FILES ${project_config} ${version_config}
+        DESTINATION lib/cmake/logaddexp)
+
+if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   enable_testing()
   add_subdirectory(test)
 endif()
