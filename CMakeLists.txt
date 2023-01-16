@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
 project(
   logaddexp
   LANGUAGES C
-  VERSION 2.1.11)
+  VERSION 2.1.12)
 
 set(LOGADDEXP_MAIN_PROJECT OFF)
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
@@ -55,7 +55,13 @@ configure_package_config_file(
   logaddexp-config.cmake.in ${CMAKE_CONFIG_FILE}
   INSTALL_DESTINATION lib/cmake/logaddexp)
 
-install(FILES ${CMAKE_CONFIG_FILE} DESTINATION lib/cmake/logaddexp)
+set(CMAKE_VERSION_FILE ${CMAKE_CURRENT_BINARY_DIR}/logaddexp-config-version.cmake)
+write_basic_package_version_file(${CMAKE_VERSION_FILE}
+                                 COMPATIBILITY SameMajorVersion)
+
+install(FILES ${CMAKE_CONFIG_FILE}
+              ${CMAKE_VERSION_FILE}
+        DESTINATION lib/cmake/logaddexp)
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md
               ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.md
