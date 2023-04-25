@@ -202,14 +202,13 @@ inline static double logaddexpss(double x, double y, double sx, double sy,
     return logaddexpgd(x, y, sx, sy, sign);
 }
 #define logaddexp(x, y)                                                        \
-    _Generic(x, float : logaddexpf, double : logaddexpd)((x), (y))
+    _Generic(x, float: logaddexpf, double: logaddexpd)((x), (y))
 
 #define logaddexps(x, y, sx, sy)                                               \
-    _Generic(x, float : logaddexpsf, double : logaddexpsd)((x), (y), (sx), (sy))
+    _Generic(x, float: logaddexpsf, double: logaddexpsd)((x), (y), (sx), (sy))
 
 #define logaddexpg(x, y, sx, sy, sign)                                         \
-    _Generic(x, float                                                          \
-             : logaddexpgf, double                                             \
-             : logaddexpgd)((x), (y), (sx), (sy), (sign))
+    _Generic(x, float: logaddexpgf, double: logaddexpgd)((x), (y), (sx), (sy), \
+                                                         (sign))
 
 #endif
